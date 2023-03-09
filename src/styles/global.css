@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-body{
+body {
   @apply text-headline;
   @apply font-sans;
+  @apply bg-background;
 }

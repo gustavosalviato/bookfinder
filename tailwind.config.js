@@ -17,7 +17,7 @@ module.exports = {
       colors: {
         background: "#16161A",
         headline: "#FFFFFE",
-        secondary: "# 72757E",
+        secondary: "#72757E",
         shape: "#202024",
         highlight: "#7F5AF0",
         tertiary: "#2CB67D",
