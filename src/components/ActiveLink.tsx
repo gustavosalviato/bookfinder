@@ -10,8 +10,6 @@ interface ActiveLinkProps {
 export function ActiveLink({ path, title, includes = false }: ActiveLinkProps) {
   const router = useRouter();
 
-  console.log(router.pathname.includes(path))
-
   function verifyIfIsActive() {
     if (includes) {
       return router.pathname.includes(path);
