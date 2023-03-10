@@ -12,6 +12,7 @@ interface IBooks {
     published_at: string;
     title: string;
     slug: string;
+    formattedDate: string;
     summary: {
       raw: {
         children: {
@@ -48,7 +49,7 @@ export default function Books({ books }: IBooks) {
           {books.map((book) => (
             <PostItem
               key={book.id}
-              pusblishDate={book.published_at}
+              pusblishDate={book.formattedDate}
               description={book.summary.raw.children[0].children[0].text}
               title={book.title}
               slug={book.slug}
@@ -77,9 +78,20 @@ export const getStaticProps: GetStaticProps = async () => {
     `,
   });
 
+  const books = data.books.map((book) => {
+    return {
+      ...book,
+      formattedDate: new Date(book.published_at).toLocaleString("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
+    };
+  });
+
   return {
     props: {
-      books: data.books,
+      books,
     },
   };
 };
