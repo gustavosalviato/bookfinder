@@ -7,3 +7,7 @@ body {
   @apply font-sans;
   @apply bg-background;
 }
+
+p{
+  @apply mt-4
+}

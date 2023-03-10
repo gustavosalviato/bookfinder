@@ -4,7 +4,7 @@ export function Header() {
   return (
     <header className="h-20 border-b border-secondary">
       <div className="h-20 max-w-[1120px] mx-auto px-8 flex items-center">
-        <p className="text-3xl font-bold">BookFinder</p>
+        <h2 className="text-3xl font-bold">BookFinder</h2>
 
         <nav className="ml-20 h-20 gap-8 flex">
           <Link
