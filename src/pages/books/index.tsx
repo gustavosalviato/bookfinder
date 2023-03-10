@@ -3,8 +3,8 @@ import { PostItem } from "@/components/PostItem";
 import { gql, useQuery } from "@apollo/client";
 
 const GET_BOOKS_QUERY = gql`
-  query {
-    books {
+  {
+    books(orderBy: publishedAt_ASC) {
       id
       published_at
       title
