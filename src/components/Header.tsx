@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { RiGithubFill } from "react-icons/ri";
+import { ActiveLink } from "./ActiveLink";
 export function Header() {
   return (
     <header className="h-20 border-b border-secondary">
@@ -7,19 +8,9 @@ export function Header() {
         <h2 className="text-3xl font-bold">BookFinder</h2>
 
         <nav className="ml-20 h-20 gap-8 flex">
-          <Link
-            href="/"
-            className="inline-block relative px-2 leading-[80px] text-secondary text-lg hover:text-gray-300 transition-colors"
-          >
-            Home
-          </Link>
+          <ActiveLink path="/" title="Home" />
 
-          <Link
-            href="/books"
-            className="inline-block relative px-2 leading-[80px] text-secondary text-lg hover:text-gray-300 transition-colors"
-          >
-            Books
-          </Link>
+          <ActiveLink path="/books" title="Books" includes />
         </nav>
 
         <button className="ml-auto flex items-center justify-center gap-2 bg-shape py-4 px-6 font-bold rounded-md hover:brightness-90 transition-colors max-sm:hidden">
