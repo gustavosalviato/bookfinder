@@ -13,10 +13,10 @@ export function Hero() {
           insightful recommendations
         </span>
       </p>
-
+{/* 
       <button className="mt-14 px-6 py-4 bg-highlight rounded-md font-medium text-lg transition-colors hover:brightness-90 w-[300px] max-lg:w-full max-lg:mt-6">
         Start to discover
-      </button>
+      </button> */}
     </section>
   );
 }

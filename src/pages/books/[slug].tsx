@@ -2,7 +2,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Header } from "@/components/Header";
 import { FiCalendar, FiUser, FiBook } from "react-icons/fi";
+import { useRouter } from "next/router";
 export default function BookItem() {
+  const router = useRouter();
+
+  console.log(router.query.slug);
+  
   return (
     <div className="h-full  w-full flex flex-col">
       <Header />
