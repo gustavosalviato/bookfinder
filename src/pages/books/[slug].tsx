@@ -60,11 +60,11 @@ export default function BookItem({ book }: BookItemProps) {
       <Header />
 
       <main className="my-20 max-w-[720px] mx-auto px-4 flex flex-col max-sm:px-8">
-        <h2 className="text-5xl text-headline leading-tight font-bold">
+        <h2 className="text-5xl max-sm:text-4xl text-headline leading-tight font-bold">
           {book.title}
         </h2>
 
-        <div className="flex justify-start mt-4 gap-6">
+        <div className="flex justify-start mt-4 gap-6 max-sm:items-start  max-sm:mt-6 max-sm:flex-col">
           <section className="flex items-center gap-2 text-secondary">
             <FiCalendar size={20} />
             {book.formattedDate}
@@ -81,18 +81,18 @@ export default function BookItem({ book }: BookItemProps) {
           </section>
         </div>
 
-        <h3 className="text-2xl text-headline mt-16 font-bold">Summary</h3>
+        <h3 className="text-2xl text-headline mt-16 font-bold max-sm:text-xl">Summary</h3>
 
         <article
           className="text-paragraph leading-relaxed text-justify mt-4 text-lg"
           dangerouslySetInnerHTML={{ __html: book.summary.html! }}
         />
 
-        <h3 className="mt-16 text-2xl font-bold">About the author</h3>
+        <h3 className="mt-16 text-2xl font-bold max-sm:text-xl">About the author</h3>
 
-        <section className="mt-6 flex gap-3 justify-start items">
+        <section className="mt-6 flex gap-3 justify-start items max-sm:flex-col max-sm:mt-8">
           <img
-            className="w-[72px] h-[72px] rounded-full object-cover"
+            className="w-[72px] h-[72px] rounded-full object-cover max-sm:justify-self-center mx-auto"
             src={book.authors[0].avatar.url}
             alt=""
           />

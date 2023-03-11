@@ -23,7 +23,7 @@ export function PostItem({
         href={`/books/${slug}`}
         className="mt-4 text-headline transition-colors hover:text-highlight hover:underline"
       >
-        <strong className="text-2xl  font-bold">{title}</strong>
+        <strong className="text-2xl font-bold max-sm:text-xl">{title}</strong>
       </Link>
 
       <p className="text-paragraph mt-2 text-lg leading-relaxed text-justify">

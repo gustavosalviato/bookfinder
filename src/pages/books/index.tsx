@@ -5,7 +5,7 @@ import { PostItem } from "@/components/PostItem";
 import { apollo } from "@/libs/apollo";
 import { gql, useQuery } from "@apollo/client";
 import { GetStaticProps } from "next";
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
 interface IBooks {
   books: {
@@ -33,11 +33,13 @@ export default function Books({ books }: IBooks) {
 
   const searchLowerCase = search.toLowerCase();
 
-  const filteredBooks = allBooks.filter((book, i) => {
-    return book.genres.find((genre) => {
-      return genre.toLowerCase().includes(searchLowerCase);
+  const filteredBooks = useMemo(() => {
+    return allBooks.filter((book, i) => {
+      return book.genres.find((genre) => {
+        return genre.toLowerCase().includes(searchLowerCase);
+      });
     });
-  });
+  }, [allBooks, searchLowerCase]);
 
   const description = filteredBooks.map((book) => {
     return book.summary.raw.children.find((child) => {
