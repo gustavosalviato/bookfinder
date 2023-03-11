@@ -5,6 +5,7 @@ import { FiCalendar, FiUser, FiBook } from "react-icons/fi";
 import { gql } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { apollo } from "@/libs/apollo";
+import { GoTop } from "@/components/GoTop";
 interface GetBookBySlugResponse {
   book: {
     id: string;
@@ -55,7 +56,7 @@ interface BookItemProps {
 }
 export default function BookItem({ book }: BookItemProps) {
   return (
-    <div className="h-full  w-full flex flex-col">
+    <div className="h-full  w-full flex flex-col relative">
       <Header />
 
       <main className="my-20 max-w-[720px] mx-auto px-4 flex flex-col max-sm:px-8">
@@ -109,6 +110,8 @@ export default function BookItem({ book }: BookItemProps) {
           dangerouslySetInnerHTML={{ __html: book.authors[0].bio.html! }}
         />
       </main>
+      
+      <GoTop />
     </div>
   );
 }

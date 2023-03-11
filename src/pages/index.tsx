@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
+import { GoTop } from "@/components/GoTop";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-
+import { FiChevronUp } from "react-icons/fi";
 export default function Home() {
   return (
     <>
-      <div className="h-screen w-screen flex flex-col">
+      <div className="h-screen w-screen flex flex-col relative">
         <Header />
 
         <main className="flex items-center justify-center max-w-[1120px] mx-auto h-full mt-20 mb-20 px-4 max-lg:flex-col max-sm:px-8">

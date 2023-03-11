@@ -1,10 +1,11 @@
+import { GoTop } from "@/components/GoTop";
 import { Header } from "@/components/Header";
 import { InputText } from "@/components/InputText";
 import { PostItem } from "@/components/PostItem";
 import { apollo } from "@/libs/apollo";
 import { gql, useQuery } from "@apollo/client";
 import { GetStaticProps } from "next";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 
 interface IBooks {
   books: {
@@ -22,47 +23,63 @@ interface IBooks {
         }[];
       };
     };
+    genres: string[];
   }[];
 }
 
 export default function Books({ books }: IBooks) {
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-  }
+  const [allBooks, setAllBooks] = useState(books);
+  const [search, setSearch] = useState("");
+
+  const searchLowerCase = search.toLowerCase();
+
+  const filteredBooks = allBooks.filter((book, i) => {
+    return book.genres.find((genre) => {
+      return genre.toLowerCase().includes(searchLowerCase);
+    });
+  });
+
+  const description = filteredBooks.map((book) => {
+    return book.summary.raw.children.find((child) => {
+      return child.children[0].text;
+    });
+  });
 
   return (
     <div className="h-screen w-full flex flex-col">
       <Header />
 
-      <main className=" max-w-[720px] mx-auto px-4 flex flex-col max-sm:px-8">
-        <form
-          onSubmit={handleSubmit}
-          className="mt-10 flex gap-6 items-center justify-start w-full"
-        >
-          <InputText />
-          <button className="h-12 font-bold py-4 px-8 flex items-center rounded-md bg-shape text-headline hover:bg-highlight transition-all">
-            SEARCH
-          </button>
-        </form>
+      <main className="max-w-[720px] w-full mx-auto px-4 flex flex-col max-sm:px-8">
+        <div className="mt-10 flex gap-6 items-center justify-start w-full">
+          <InputText
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
 
         <section className="mt-8 mb-20">
-          {books.map((book) => (
+          {filteredBooks.map((book, i) => (
             <PostItem
               key={book.id}
               pusblishDate={book.formattedDate}
-              description={book.summary.raw.children[0].children[0].text}
+              description={book.summary.raw.children.map((child) => {
+                return child.children[0].text;
+              })}
               title={book.title}
               slug={book.slug}
+              genres={book.genres}
             />
           ))}
         </section>
       </main>
+
+      <GoTop />
     </div>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await apollo.query<IBooks>({
+  const { data } = await apollo.query({
     query: gql`
       {
         books(orderBy: publishedAt_ASC) {
@@ -73,12 +90,16 @@ export const getStaticProps: GetStaticProps = async () => {
           summary {
             raw
           }
+          genres {
+            id
+            title
+          }
         }
       }
     `,
   });
 
-  const books = data.books.map((book) => {
+  const books = data.books.map((book: any) => {
     return {
       ...book,
       formattedDate: new Date(book.published_at).toLocaleString("en-US", {
@@ -86,6 +107,9 @@ export const getStaticProps: GetStaticProps = async () => {
         month: "long",
         year: "numeric",
       }),
+      genres: book.genres.map(
+        (genre: { title: string; id: string }) => genre.title
+      ),
     };
   });
 
