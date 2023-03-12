@@ -20,11 +20,11 @@ export function ActiveLink({ path, title, includes = false }: ActiveLinkProps) {
 
   const isActive = verifyIfIsActive();
   return (
-    <div>
+    <div className="flex items-center ">
       <Link
         href={path}
         className={clsx(
-          "inline-block relative px-2 leading-[80px] text-lg hover:text-gray-300 transition-colors font-bold",
+          "inline-block relative px-2 text-lg hover:text-gray-300 transition-colors font-bold",
           {
             "text-white": isActive,
             "text-secondary": !isActive,
