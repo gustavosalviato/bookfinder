@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { GoTop } from "@/components/GoTop";
 import { Header } from "@/components/Header";
 import { InputText } from "@/components/InputText";
@@ -6,7 +7,6 @@ import { apollo } from "@/libs/apollo";
 import { gql, useQuery } from "@apollo/client";
 import { GetStaticProps } from "next";
 import { FormEvent, useMemo, useState } from "react";
-
 interface IBooks {
   books: {
     id: string;
@@ -72,6 +72,22 @@ export default function Books({ books }: IBooks) {
               genres={book.genres}
             />
           ))}
+
+          {filteredBooks.length === 0 && (
+            <div className="flex justify-center items-center flex-col h-52 mt-16">
+              <img
+                src="/images/levitate.svg"
+                alt=""
+                className="w-[300px] h-[300px] max-sm:h-25 max-sm:w-25"
+              />
+              <strong className="text-2xl text-headline font-bold textce">
+                No results to show
+              </strong>
+              <p className="text-secondary text-lg text-center">
+                Please check spelling or try different keywords
+              </p>
+            </div>
+          )}
         </section>
       </main>
 
