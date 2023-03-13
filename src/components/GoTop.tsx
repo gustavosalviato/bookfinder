@@ -9,7 +9,7 @@ export function GoTop() {
   }
   return (
     <button
-      className="absolute w-12 h-12 bottom-10 right-10 bg-shape flex justify-center items-center rounded-md hover:brightness-90"
+      className="max-md:hidden absolute w-12 h-12 bottom-10 right-10 bg-shape flex justify-center items-center rounded-md hover:brightness-90"
       aria-label="Go to top of page"
       onClick={handleScrollTop}
     >

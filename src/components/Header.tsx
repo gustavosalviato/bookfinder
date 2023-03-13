@@ -15,7 +15,9 @@ export function Header() {
   return (
     <header className="border-b border-secondary">
       <div className="max-w-[1120px] mx-auto px-8 h-[80px] flex items-center relative max-md:justify-between">
-        <h2 className="text-3xl font-bold">BookFinder</h2>
+        <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-tertiary to-highlight text-3xl font-bold">
+          BookFinder
+          </h2>
 
         <nav className="ml-20 gap-8 flex h-full max-md:hidden">
           <ActiveLink path="/" title="Home" />

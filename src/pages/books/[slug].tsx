@@ -95,15 +95,17 @@ export default function BookItem({ book }: BookItemProps) {
           About the author
         </h3>
 
-        <section className="mt-6 flex gap-3 justify-start items max-sm:flex-col max-sm:mt-8">
+        <section className="mt-6 flex gap-4 max-sm:flex-col max-sm:mt-8">
           <img
-            className="w-[72px] h-[72px] rounded-full object-cover max-sm:justify-self-center mx-auto"
+            className="w-[72px] h-[72px] rounded-full object-cover"
             src={book.authors[0].avatar.url}
             alt=""
           />
 
-          <div className="flex flex-col">
-            <strong className="text-headline text-xl">Roger Fouts</strong>
+          <div className="flex flex-col justify-center">
+            <strong className="text-headline text-xl">
+              {book.authors[0].name}
+            </strong>
             <p className="text-justify text-paragraph leading-tight mt-1">
               {book.authors[0].subtitle}
             </p>
@@ -120,8 +122,6 @@ export default function BookItem({ book }: BookItemProps) {
     </div>
   );
 }
-
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { "next-auth.session-token": token } = parseCookies(context);

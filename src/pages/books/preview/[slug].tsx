@@ -6,7 +6,6 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import styles from "./styles.module.css";
 
 interface PreviewBookProps {
   book: {
@@ -25,12 +24,20 @@ export default function PreviewBook({ book }: PreviewBookProps) {
 
   const router = useRouter();
 
-  console.log(book);
   useEffect(() => {
     if (session.data?.user) {
       router.push(`/books/${book?.slug}`);
     }
   }, [book?.slug]);
+
+  if (router.isFallback) {
+    <div className="h-screen flex justify-center items-center">
+      <p className="text-xl font-bold text-highlight animate-bounce">
+        loading content...
+      </p>
+    </div>;
+  }
+
   return (
     <div className="h-full  w-full flex flex-col relative">
       <Header />
@@ -46,7 +53,8 @@ export default function PreviewBook({ book }: PreviewBookProps) {
           </div>
 
           <article
-            className={styles.previewContent}
+            // className={styles.previewContent}
+            className="text-justify leading-relaxed mt-6 text-paragraph bg-clip-text text-transparent bg-gradient-to-b from-paragraph to-transparent"
             dangerouslySetInnerHTML={{ __html: book?.summary.html! }}
           />
 
@@ -59,7 +67,11 @@ export default function PreviewBook({ book }: PreviewBookProps) {
           </button>
         </main>
       ) : (
-        <p>Loading content</p>
+        <div className="h-screen flex justify-center items-center animate-pulse">
+          <p className="text-xl font-bold text-highlight animate-pulse">
+            Loading content...
+          </p>
+        </div>
       )}
     </div>
   );
@@ -101,7 +113,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }),
   };
 
-  console.log(book);
 
   return {
     props: {
