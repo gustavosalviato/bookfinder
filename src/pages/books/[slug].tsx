@@ -4,7 +4,7 @@ import { gql } from '@apollo/client'
 import { GetServerSideProps } from 'next'
 import { apollo } from '@/libs/apollo'
 import { GoTop } from '@/components/GoTop'
-import { parseCookies } from 'nookies'
+import { parseCookies, setCookie } from 'nookies'
 interface GetBookBySlugResponse {
   book: {
     id: string
@@ -122,7 +122,7 @@ export default function BookItem({ book }: BookItemProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { 'next-auth.session-token': token } = parseCookies(context)
+  const { '__Secure-next-auth.session-token': token } = parseCookies(context)
 
   if (!token) {
     return {

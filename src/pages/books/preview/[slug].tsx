@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Header } from '@/components/Header'
 import { apollo } from '@/libs/apollo'
 import { gql } from '@apollo/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { parseCookies } from 'nookies'
 import { useEffect } from 'react'
 
 interface PreviewBookProps {
@@ -23,19 +26,21 @@ export default function PreviewBook({ book }: PreviewBookProps) {
 
   const router = useRouter()
 
-  useEffect(() => {
-    if (session.data?.user) {
-      router.push(`/books/${book?.slug}`)
-    }
-  }, [book?.slug, router, session.data?.user])
-
   if (router.isFallback) {
-    ;<div className="h-screen flex justify-center items-center">
-      <p className="text-xl font-bold text-highlight animate-bounce">
-        loading content...
-      </p>
-    </div>
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p className="text-xl font-bold text-highlight animate-bounce">
+          loading content...
+        </p>
+      </div>
+    )
   }
+
+  useEffect(() => {
+    if (session?.data?.user) {
+      router.push(`/books/${book.slug}`)
+    }
+  }, [session?.data?.user])
 
   return (
     <div className="h-full  w-full flex flex-col relative">
@@ -52,7 +57,6 @@ export default function PreviewBook({ book }: PreviewBookProps) {
           </div>
 
           <article
-            // className={styles.previewContent}
             className="text-justify leading-relaxed mt-6 text-paragraph bg-clip-text text-transparent bg-gradient-to-b from-paragraph to-transparent"
             dangerouslySetInnerHTML={{ __html: book?.summary.html! }}
           />
@@ -79,7 +83,7 @@ export default function PreviewBook({ book }: PreviewBookProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 
