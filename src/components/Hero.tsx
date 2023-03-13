@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Hero() {
   return (
     <section className="max-w-[600px] max-lg:w-full max-sm:w-full">
@@ -13,10 +15,12 @@ export function Hero() {
           insightful recommendations
         </span>
       </p>
-{/* 
-      <button className="mt-14 px-6 py-4 bg-highlight rounded-md font-medium text-lg transition-colors hover:brightness-90 w-[300px] max-lg:w-full max-lg:mt-6">
-        Start to discover
-      </button> */}
+
+      <Link href="/books">
+        <button className="mt-14 h-12 bg-highlight rounded-md font-medium text-lg transition-colors hover:brightness-90 w-[300px] max-lg:w-full ">
+          Start to discover
+        </button>
+      </Link>
     </section>
   );
 }

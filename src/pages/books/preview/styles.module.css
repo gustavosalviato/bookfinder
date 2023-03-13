@@ -1,0 +1,9 @@
+.previewContent {
+  text-align: justify;
+  line-height: 1.625rem;
+  margin-top: 1rem;
+  color: #94A1B2;
+  background: linear-gradient(#94A1B2, transparent);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

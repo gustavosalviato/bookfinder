@@ -17,6 +17,7 @@ export default function Home() {
             src="/images/reading.svg"
             alt=""
           />
+
         </main>
       </div>
     </>

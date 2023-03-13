@@ -6,6 +6,7 @@ import { PostItem } from "@/components/PostItem";
 import { apollo } from "@/libs/apollo";
 import { gql, useQuery } from "@apollo/client";
 import { GetStaticProps } from "next";
+import { redirect } from "next/dist/server/api-utils";
 import { FormEvent, useMemo, useState } from "react";
 interface IBooks {
   books: {
@@ -90,8 +91,6 @@ export default function Books({ books }: IBooks) {
           )}
         </section>
       </main>
-
-      <GoTop />
     </div>
   );
 }

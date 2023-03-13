@@ -3,9 +3,10 @@
 import { Header } from "@/components/Header";
 import { FiCalendar, FiUser, FiBook } from "react-icons/fi";
 import { gql } from "@apollo/client";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import { apollo } from "@/libs/apollo";
 import { GoTop } from "@/components/GoTop";
+import { parseCookies } from "nookies";
 interface GetBookBySlugResponse {
   book: {
     id: string;
@@ -81,14 +82,18 @@ export default function BookItem({ book }: BookItemProps) {
           </section>
         </div>
 
-        <h3 className="text-2xl text-headline mt-16 font-bold max-sm:text-xl">Summary</h3>
+        <h3 className="text-2xl text-headline mt-16 font-bold max-sm:text-xl">
+          Summary
+        </h3>
 
         <article
           className="text-paragraph leading-relaxed text-justify mt-4 text-lg"
           dangerouslySetInnerHTML={{ __html: book.summary.html! }}
         />
 
-        <h3 className="mt-16 text-2xl font-bold max-sm:text-xl">About the author</h3>
+        <h3 className="mt-16 text-2xl font-bold max-sm:text-xl">
+          About the author
+        </h3>
 
         <section className="mt-6 flex gap-3 justify-start items max-sm:flex-col max-sm:mt-8">
           <img
@@ -110,43 +115,26 @@ export default function BookItem({ book }: BookItemProps) {
           dangerouslySetInnerHTML={{ __html: book.authors[0].bio.html! }}
         />
       </main>
-      
+
       <GoTop />
     </div>
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  interface GetBooksSlugResponse {
-    books: {
-      slug: string;
-    }[];
-  }
-  const { data } = await apollo.query<GetBooksSlugResponse>({
-    query: gql`
-      query GetAllBooks {
-        books {
-          slug
-        }
-      }
-    `,
-  });
 
-  const paths = data.books.map((book) => {
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { "next-auth.session-token": token } = parseCookies(context);
+
+  if (!token) {
     return {
-      params: {
-        slug: book.slug,
+      redirect: {
+        destination: `/books/preview/${context.params?.slug}`,
+        permanent: false,
       },
     };
-  });
+  }
 
-  return {
-    paths,
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await apollo.query<GetBookBySlugResponse>({
     query: gql`
       query GetBookBySlug($slug: String!) {
@@ -173,7 +161,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     `,
     variables: {
-      slug: params?.slug as string,
+      slug: context.params?.slug as string,
     },
   });
 

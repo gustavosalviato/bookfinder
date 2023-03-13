@@ -4,6 +4,7 @@ import { ActiveLink } from "./ActiveLink";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
 import { ResponsiveNavBar } from "./ResponsiveNavBar";
+import { SignInButton } from "./SignInButton";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -21,10 +22,7 @@ export function Header() {
           <ActiveLink path="/books" title="Books" includes />
         </nav>
 
-        <button className="ml-auto flex items-center justify-center gap-2 bg-shape py-4 px-6 font-bold rounded-md hover:brightness-90 transition-colors max-sm:ml-0 max-sm:mt-4 max-md:hidden">
-          <RiGithubFill size={24} className="text-highlight" />
-          Sign in with GitHub
-        </button>
+        <SignInButton />
 
         {isMenuOpen && <ResponsiveNavBar />}
 
