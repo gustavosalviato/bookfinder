@@ -42,7 +42,7 @@ BookFinder is a blog that recommends books according to the genre you prefer
 
 ## 🔖 Layout
 
-Você pode visualizar o layout do projeto através this [LINK](https://www.figma.com/file/Y4lxlNujNoMVPfcmngBG4c/BookFinder?node-id=0%3A1&t=UuivCF4hlRqik53p-1).
+You can view the layout through this [LINK](https://www.figma.com/file/Y4lxlNujNoMVPfcmngBG4c/BookFinder?node-id=0%3A1&t=UuivCF4hlRqik53p-1).
 
 ## :memo: License
 
