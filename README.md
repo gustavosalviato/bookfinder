@@ -38,7 +38,7 @@ This project was developed with the following technologies:
 
 BookFinder is a blog that recommends books according to the genre you prefer
 
-- [Final project]()
+- [Final project](https://bookfinder-nu.vercel.app/)
 
 ## 🔖 Layout
 
