@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 // eslint-disable-next-line react/display-name
-import { forwardRef, InputHTMLAttributes } from "react";
-import { FiSearch } from "react-icons/fi";
+import { forwardRef, InputHTMLAttributes } from 'react'
+import { FiSearch } from 'react-icons/fi'
 
 interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -18,6 +18,6 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
         />
         <FiSearch size={20} className=" " />
       </div>
-    );
-  }
-);
+    )
+  },
+)

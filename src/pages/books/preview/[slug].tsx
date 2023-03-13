@@ -1,41 +1,40 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Header } from "@/components/Header";
-import { apollo } from "@/libs/apollo";
-import { gql } from "@apollo/client";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { Header } from '@/components/Header'
+import { apollo } from '@/libs/apollo'
+import { gql } from '@apollo/client'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 interface PreviewBookProps {
   book: {
-    id: string;
-    formattedDate: string;
-    slug: string;
-    title: string;
+    id: string
+    formattedDate: string
+    slug: string
+    title: string
     summary: {
-      html: string | undefined;
-    };
-  };
+      html: string | undefined
+    }
+  }
 }
 
 export default function PreviewBook({ book }: PreviewBookProps) {
-  const session = useSession();
+  const session = useSession()
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (session.data?.user) {
-      router.push(`/books/${book?.slug}`);
+      router.push(`/books/${book?.slug}`)
     }
-  }, [book?.slug]);
+  }, [book?.slug, router, session.data?.user])
 
   if (router.isFallback) {
-    <div className="h-screen flex justify-center items-center">
+    ;<div className="h-screen flex justify-center items-center">
       <p className="text-xl font-bold text-highlight animate-bounce">
         loading content...
       </p>
-    </div>;
+    </div>
   }
 
   return (
@@ -59,10 +58,10 @@ export default function PreviewBook({ book }: PreviewBookProps) {
           />
 
           <button
-            onClick={() => signIn("github")}
+            onClick={() => signIn('github')}
             className="mt-12 w-full rounded-md bg-shape h-12 font-medium transition-colors text-lg duration-300 hover:brightness-90 max-md:text-base"
           >
-            Want to continue reading?{" "}
+            Want to continue reading?{' '}
             <strong className="text-highlight">Sign in 🙋</strong>
           </button>
         </main>
@@ -74,15 +73,15 @@ export default function PreviewBook({ book }: PreviewBookProps) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: true,
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await apollo.query({
@@ -102,22 +101,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     variables: {
       slug: params?.slug as string,
     },
-  });
+  })
 
   const book = {
     ...data.book,
-    formattedDate: new Date(data?.book?.published_at!).toLocaleString("en-US", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
+    formattedDate: new Date(data?.book?.published_at!).toLocaleString('en-US', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
     }),
-  };
-
+  }
 
   return {
     props: {
       book,
     },
     revalidate: 60 * 60 * 24, // 1 day
-  };
-};
+  }
+}

@@ -1,52 +1,49 @@
-/* eslint-disable @next/next/no-img-element */
-import { GoTop } from "@/components/GoTop";
-import { Header } from "@/components/Header";
-import { InputText } from "@/components/InputText";
-import { PostItem } from "@/components/PostItem";
-import { apollo } from "@/libs/apollo";
-import { gql, useQuery } from "@apollo/client";
-import { GetStaticProps } from "next";
-import { redirect } from "next/dist/server/api-utils";
-import { FormEvent, useMemo, useState } from "react";
+import { Header } from '@/components/Header'
+import { InputText } from '@/components/InputText'
+import { PostItem } from '@/components/PostItem'
+import { apollo } from '@/libs/apollo'
+import { gql } from '@apollo/client'
+import { GetStaticProps } from 'next'
+import { useMemo, useState } from 'react'
 interface IBooks {
   books: {
-    id: string;
-    published_at: string;
-    title: string;
-    slug: string;
-    formattedDate: string;
+    id: string
+    published_at: string
+    title: string
+    slug: string
+    formattedDate: string
     summary: {
       raw: {
         children: {
           children: {
-            text: string;
-          }[];
-        }[];
-      };
-    };
-    genres: string[];
-  }[];
+            text: string
+          }[]
+        }[]
+      }
+    }
+    genres: string[]
+  }[]
 }
 
 export default function Books({ books }: IBooks) {
-  const [allBooks, setAllBooks] = useState(books);
-  const [search, setSearch] = useState("");
+  const [allBooks, setAllBooks] = useState(books)
+  const [search, setSearch] = useState('')
 
-  const searchLowerCase = search.toLowerCase();
+  const searchLowerCase = search.toLowerCase()
 
   const filteredBooks = useMemo(() => {
     return allBooks.filter((book, i) => {
       return book.genres.find((genre) => {
-        return genre.toLowerCase().includes(searchLowerCase);
-      });
-    });
-  }, [allBooks, searchLowerCase]);
+        return genre.toLowerCase().includes(searchLowerCase)
+      })
+    })
+  }, [allBooks, searchLowerCase])
 
   const description = filteredBooks.map((book) => {
     return book.summary.raw.children.find((child) => {
-      return child.children[0].text;
-    });
-  });
+      return child.children[0].text
+    })
+  })
 
   return (
     <div className="h-screen w-full flex flex-col">
@@ -66,7 +63,7 @@ export default function Books({ books }: IBooks) {
               key={book.id}
               pusblishDate={book.formattedDate}
               description={book.summary.raw.children.map((child) => {
-                return child.children[0].text;
+                return child.children[0].text
               })}
               title={book.title}
               slug={book.slug}
@@ -92,7 +89,7 @@ export default function Books({ books }: IBooks) {
         </section>
       </main>
     </div>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -114,25 +111,25 @@ export const getStaticProps: GetStaticProps = async () => {
         }
       }
     `,
-  });
+  })
 
   const books = data.books.map((book: any) => {
     return {
       ...book,
-      formattedDate: new Date(book.published_at).toLocaleString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
+      formattedDate: new Date(book.published_at).toLocaleString('en-US', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
       }),
       genres: book.genres.map(
-        (genre: { title: string; id: string }) => genre.title
+        (genre: { title: string; id: string }) => genre.title,
       ),
-    };
-  });
+    }
+  })
 
   return {
     props: {
       books,
     },
-  };
-};
+  }
+}

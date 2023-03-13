@@ -1,59 +1,57 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/no-unescaped-entities */
-import { Header } from "@/components/Header";
-import { FiCalendar, FiUser, FiBook } from "react-icons/fi";
-import { gql } from "@apollo/client";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { apollo } from "@/libs/apollo";
-import { GoTop } from "@/components/GoTop";
-import { parseCookies } from "nookies";
+import { Header } from '@/components/Header'
+import { FiCalendar, FiUser, FiBook } from 'react-icons/fi'
+import { gql } from '@apollo/client'
+import { GetServerSideProps } from 'next'
+import { apollo } from '@/libs/apollo'
+import { GoTop } from '@/components/GoTop'
+import { parseCookies } from 'nookies'
 interface GetBookBySlugResponse {
   book: {
-    id: string;
-    pages: string;
-    published_at: string;
-    slug: string;
-    title: string;
+    id: string
+    pages: string
+    published_at: string
+    slug: string
+    title: string
     summary: {
-      html: string | undefined;
-    };
+      html: string | undefined
+    }
     authors: {
-      name: string;
-      subtitle: string;
+      name: string
+      subtitle: string
       avatar: {
-        url: string;
-      };
+        url: string
+      }
       bio: {
-        html: string;
-      };
-    }[];
-  };
+        html: string
+      }
+    }[]
+  }
 }
 
 interface IBook {
-  id: string;
-  pages: string;
-  published_at: string;
-  formattedDate: string;
-  slug: string;
-  title: string;
+  id: string
+  pages: string
+  published_at: string
+  formattedDate: string
+  slug: string
+  title: string
   summary: {
-    html: string | undefined;
-  };
+    html: string | undefined
+  }
   authors: {
-    name: string;
-    subtitle: string;
+    name: string
+    subtitle: string
     avatar: {
-      url: string;
-    };
+      url: string
+    }
     bio: {
-      html: string;
-    };
-  }[];
+      html: string
+    }
+  }[]
 }
 
 interface BookItemProps {
-  book: IBook;
+  book: IBook
 }
 export default function BookItem({ book }: BookItemProps) {
   return (
@@ -120,11 +118,11 @@ export default function BookItem({ book }: BookItemProps) {
 
       <GoTop />
     </div>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { "next-auth.session-token": token } = parseCookies(context);
+  const { 'next-auth.session-token': token } = parseCookies(context)
 
   if (!token) {
     return {
@@ -132,7 +130,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         destination: `/books/preview/${context.params?.slug}`,
         permanent: false,
       },
-    };
+    }
   }
 
   const { data } = await apollo.query<GetBookBySlugResponse>({
@@ -163,20 +161,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     variables: {
       slug: context.params?.slug as string,
     },
-  });
+  })
 
   const book = {
     ...data.book,
-    formattedDate: new Date(data.book.published_at!).toLocaleString("en-US", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
+    formattedDate: new Date(data.book.published_at!).toLocaleString('en-US', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
     }),
-  };
+  }
 
   return {
     props: {
       book,
     },
-  };
-};
+  }
+}

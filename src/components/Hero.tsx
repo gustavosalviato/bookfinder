@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export function Hero() {
   return (
@@ -10,7 +10,7 @@ export function Hero() {
       </h1>
 
       <p className="mt-6 text-secondary text-2xl max-lg:text-xl">
-        We’ll give you surprisingly{" "}
+        We’ll give you surprisingly{' '}
         <span className="text-tertiary font-bold">
           insightful recommendations
         </span>
@@ -22,5 +22,5 @@ export function Hero() {
         </button>
       </Link>
     </section>
-  );
+  )
 }

@@ -1,38 +1,38 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { clsx } from "clsx";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { clsx } from 'clsx'
 interface ActiveLinkProps {
-  path: string;
-  title: string;
-  includes?: boolean;
+  path: string
+  title: string
+  includes?: boolean
 }
 
 export function ActiveLink({ path, title, includes = false }: ActiveLinkProps) {
-  const router = useRouter();
+  const router = useRouter()
 
   function verifyIfIsActive() {
     if (includes) {
-      return router.pathname.includes(path);
+      return router.pathname.includes(path)
     }
 
-    return router.pathname === path;
+    return router.pathname === path
   }
 
-  const isActive = verifyIfIsActive();
+  const isActive = verifyIfIsActive()
   return (
     <div className="flex items-center ">
       <Link
         href={path}
         className={clsx(
-          "inline-block relative px-2 text-lg hover:text-gray-300 transition-colors font-bold",
+          'inline-block relative px-2 text-lg hover:text-gray-300 transition-colors font-bold',
           {
-            "text-white": isActive,
-            "text-secondary": !isActive,
-          }
+            'text-white': isActive,
+            'text-secondary': !isActive,
+          },
         )}
       >
         {title}
       </Link>
     </div>
-  );
+  )
 }

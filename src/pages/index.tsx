@@ -1,8 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
-import { GoTop } from "@/components/GoTop";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { FiChevronUp } from "react-icons/fi";
+import { Header } from '@/components/Header'
+import { Hero } from '@/components/Hero'
 export default function Home() {
   return (
     <>
@@ -17,9 +14,8 @@ export default function Home() {
             src="/images/reading.svg"
             alt=""
           />
-
         </main>
       </div>
     </>
-  );
+  )
 }

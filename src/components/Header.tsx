@@ -1,15 +1,13 @@
-import Link from "next/link";
-import { RiGithubFill } from "react-icons/ri";
-import { ActiveLink } from "./ActiveLink";
-import { FiMenu, FiX } from "react-icons/fi";
-import { useState } from "react";
-import { ResponsiveNavBar } from "./ResponsiveNavBar";
-import { SignInButton } from "./SignInButton";
+import { ActiveLink } from './ActiveLink'
+import { FiMenu, FiX } from 'react-icons/fi'
+import { useState } from 'react'
+import { ResponsiveNavBar } from './ResponsiveNavBar'
+import { SignInButton } from './SignInButton'
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   function handleOpenResponsiveMenu() {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen)
   }
 
   return (
@@ -17,7 +15,7 @@ export function Header() {
       <div className="max-w-[1120px] mx-auto px-8 h-[80px] flex items-center relative max-md:justify-between">
         <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-tertiary to-highlight text-3xl font-bold">
           BookFinder
-          </h2>
+        </h2>
 
         <nav className="ml-20 gap-8 flex h-full max-md:hidden">
           <ActiveLink path="/" title="Home" />
@@ -36,5 +34,5 @@ export function Header() {
         </button>
       </div>
     </header>
-  );
+  )
 }

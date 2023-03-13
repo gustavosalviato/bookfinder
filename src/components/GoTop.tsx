@@ -1,11 +1,11 @@
-import { FiChevronUp } from "react-icons/fi";
+import { FiChevronUp } from 'react-icons/fi'
 
 export function GoTop() {
   function handleScrollTop() {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
-    });
+      behavior: 'smooth',
+    })
   }
   return (
     <button
@@ -15,5 +15,5 @@ export function GoTop() {
     >
       <FiChevronUp />
     </button>
-  );
+  )
 }

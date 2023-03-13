@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 interface PostProps {
-  pusblishDate: string;
-  title: string;
-  description: string[];
-  slug: string;
-  genres: string[];
+  pusblishDate: string
+  title: string
+  description: string[]
+  slug: string
+  genres: string[]
 }
 
 export function PostItem({
@@ -44,10 +44,10 @@ export function PostItem({
               >
                 {genre}
               </span>
-            );
+            )
           })}
         </div>
       </div>
     </section>
-  );
+  )
 }
