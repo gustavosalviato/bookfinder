@@ -6,7 +6,10 @@ export function ResponsiveNavBar() {
   const session = useSession()
 
   return (
-    <div className="absolute bg-shape right-5 top-14 p-6 rounded-md shadow flex justify-start items-stretch flex-col w-40 transition-all  ease-in duration-300">
+    <div
+      className="absolute bg-shape right-5 top-14 p-6 rounded-md shadow flex justify-start items-stretch flex-col w-40 transition-all  ease-in duration-300"
+      data-testid="reponsive-nav-bar"
+    >
       <nav className="flex flex-col gap-6">
         <ActiveLink path="/" title="Home" />
         <ActiveLink path="/books" title="Books" includes />
