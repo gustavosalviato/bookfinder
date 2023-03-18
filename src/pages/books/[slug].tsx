@@ -122,8 +122,7 @@ export default function BookItem({ book }: BookItemProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const { '__Secure-next-auth.session-token': token } = parseCookies(context)
-  const { 'next-auth.session-token': token } = parseCookies(context)
+  const { '__Secure-next-auth.session-token': token } = parseCookies(context)
 
   if (!token) {
     return {
