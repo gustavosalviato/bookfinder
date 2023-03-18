@@ -16,7 +16,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           ref={ref}
           {...props}
         />
-        <FiSearch size={20} className=" " />
+        <FiSearch size={20} />
       </div>
     )
   },
