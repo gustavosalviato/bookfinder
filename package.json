@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --ext .tsx,.ts",
-    "lint:fix": "eslint src --ext .tsx,.ts --fix"
+    "lint:fix": "eslint src --ext .tsx,.ts --fix",
+    "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",
@@ -29,7 +30,14 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",
+    "@testing-library/dom": "^9.0.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "autoprefixer": "^10.4.13",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "jest-dom": "^4.0.0",
+    "jest-environment-jsdom": "^29.5.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
   }
