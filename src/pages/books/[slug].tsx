@@ -1,10 +1,10 @@
-import { Header } from '@/components/Header'
+import { Header } from '../../components/Header'
 import { FiCalendar, FiUser, FiBook } from 'react-icons/fi'
 import { gql } from '@apollo/client'
 import { GetServerSideProps } from 'next'
-import { apollo } from '@/libs/apollo'
-import { GoTop } from '@/components/GoTop'
-import { parseCookies, setCookie } from 'nookies'
+import { apollo } from '../../libs/apollo'
+import { GoTop } from '../../components/GoTop'
+import { parseCookies } from 'nookies'
 interface GetBookBySlugResponse {
   book: {
     id: string
@@ -97,7 +97,7 @@ export default function BookItem({ book }: BookItemProps) {
           <img
             className="w-[72px] h-[72px] rounded-full object-cover"
             src={book.authors[0].avatar.url}
-            alt=""
+            alt={book.authors[0].name}
           />
 
           <div className="flex flex-col justify-center">
@@ -122,7 +122,8 @@ export default function BookItem({ book }: BookItemProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { '__Secure-next-auth.session-token': token } = parseCookies(context)
+  // const { '__Secure-next-auth.session-token': token } = parseCookies(context)
+  const { 'next-auth.session-token': token } = parseCookies(context)
 
   if (!token) {
     return {

@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { render, screen } from "@testing-library/react";
 import Home from "../../pages/index";
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 jest.mock("next/router", () => {
