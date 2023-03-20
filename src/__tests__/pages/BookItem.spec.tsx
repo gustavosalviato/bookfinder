@@ -133,7 +133,7 @@ describe("BookItem Page", () => {
     const parseCookiesMocked = jest.mocked(parseCookies);
 
     parseCookiesMocked.mockReturnValue({
-      "next-auth.session-token": "test-next-auth.session-token",
+      "__Secure-next-auth.session-token": "test-next-auth.session-token",
     } as any);
 
     const mockedApollo = jest.mocked(apollo);
