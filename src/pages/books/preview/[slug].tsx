@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Header } from '@/components/Header'
-import { apollo } from '@/libs/apollo'
+import { Header } from '../../../components/Header'
+import { apollo } from '../../../libs/apollo'
 import { gql } from '@apollo/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { parseCookies } from 'nookies'
 import { useEffect } from 'react'
 
 interface PreviewBookProps {
@@ -64,6 +63,7 @@ export default function PreviewBook({ book }: PreviewBookProps) {
           <button
             onClick={() => signIn('github')}
             className="mt-12 w-full rounded-md bg-shape h-12 font-medium transition-colors text-lg duration-300 hover:brightness-90 max-md:text-base"
+            data-testid="button-preview-sign-in"
           >
             Want to continue reading?{' '}
             <strong className="text-highlight">Sign in 🙋</strong>
