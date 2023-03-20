@@ -19,6 +19,7 @@ export function ResponsiveNavBar() {
         <button
           onClick={() => signOut()}
           className="mt-6 flex items-center justify-center gap-2 border-2 border-tertiary font-bold rounded-md hover:brightness-90 transition-colors text-sm w-full py-2 uppercase px-2 group hover:bg-tertiary"
+          data-testid="sign-out-button"
         >
           <RiGithubFill
             size={24}
@@ -30,6 +31,7 @@ export function ResponsiveNavBar() {
         <button
           onClick={() => signIn('github')}
           className="mt-6 flex items-center justify-center gap-2 border-2 border-highlight font-bold rounded-md hover:brightness-90 transition-colors text-sm w-full py-2 uppercase px-2 group hover:bg-highlight"
+          data-testid="sign-in-button"
         >
           <RiGithubFill
             size={24}

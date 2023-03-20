@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { screen, render } from "@testing-library/react";
 import { Header } from "../../components/Header";
-import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
 
 jest.mock("next/router", () => {
@@ -19,7 +18,6 @@ describe("Header component", () => {
         <Header />
       </SessionProvider>
     );
-
     expect(screen.getByText("BookFinder")).toBeInTheDocument();
   });
 });

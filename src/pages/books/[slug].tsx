@@ -54,6 +54,12 @@ interface BookItemProps {
   book: IBook
 }
 export default function BookItem({ book }: BookItemProps) {
+  function handleScrollTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
   return (
     <div className="h-full  w-full flex flex-col relative">
       <Header />
@@ -116,7 +122,7 @@ export default function BookItem({ book }: BookItemProps) {
         />
       </main>
 
-      <GoTop />
+      <GoTop onScrollTop={handleScrollTop} />
     </div>
   )
 }
