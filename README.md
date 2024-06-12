@@ -9,8 +9,7 @@ We’ll give you surprisingly insightful recommendations
 <p align="center">
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-license">License</a>
+  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 <p align="center">
@@ -43,10 +42,6 @@ BookFinder is a blog that recommends books according to the genre you prefer
 ## 🔖 Layout
 
 You can view the layout through this [LINK](https://www.figma.com/file/Y4lxlNujNoMVPfcmngBG4c/BookFinder?node-id=0%3A1&t=UuivCF4hlRqik53p-1).
-
-## :memo: License
-
-This project is licensed under the MIT license.
 
 ---
 
